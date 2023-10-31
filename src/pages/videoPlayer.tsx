@@ -1,7 +1,7 @@
 import ReactPlayer from "react-player";
 import "./videoPlayer.style.css";
 import { Container } from "@mui/material";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import Control from "../components/control";
 import { formatTime } from "../utils/format";
 import { useLocation } from "react-router-dom";
@@ -54,7 +54,7 @@ function VideoPlayer() {
   };
 
   const [count, setCount] = useState<number>(0);
-  const controlRef = useRef<HTMLElement | null>(null);
+  const controlRef = useRef<HTMLElement>(null);
 
   const progressHandler = (state: { played: number }) => {
     if (count > 1 && controlRef.current) {
@@ -74,27 +74,30 @@ function VideoPlayer() {
   };
 
   const seekHandler = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => {
-    setVideoState({ ...videoState, played: parseFloat(value) / 100 });
+    setVideoState({
+      ...videoState,
+      played: parseFloat(value.toString()) / 100,
+    });
   };
 
   const seekMouseUpHandler = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: number
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => {
     setVideoState({ ...videoState, seeking: false });
     if (videoPlayerRef.current) {
-      videoPlayerRef.current.seekTo(value / 100);
+      videoPlayerRef.current.seekTo(parseFloat(value.toString()) / 100);
     }
   };
 
   const volumeChangeHandler = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => {
-    const newVolume = parseFloat(value) / 100;
+    const newVolume = parseFloat(value.toString()) / 100;
     setVideoState({
       ...videoState,
       volume: newVolume,
@@ -103,10 +106,10 @@ function VideoPlayer() {
   };
 
   const volumeSeekUpHandler = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => {
-    const newVolume = parseFloat(value) / 100;
+    const newVolume = parseFloat(value.toString()) / 100;
     setVideoState({
       ...videoState,
       volume: newVolume,
@@ -127,9 +130,10 @@ function VideoPlayer() {
     ? videoPlayerRef.current.getDuration()
     : "00:00";
 
-  const formatCurrentTime = formatTime(currentTime);
+  const formatCurrentTime =
+    currentTime === "00:00" ? "00:00" : formatTime(currentTime);
 
-  const formatDuration = formatTime(duration);
+  const formatDuration = duration === "00:00" ? "00:00" : formatTime(duration);
 
   const mouseMoveHandler = () => {
     if (controlRef.current) {

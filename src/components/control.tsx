@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, RefObject } from "react";
 import {
   makeStyles,
   Slider,
@@ -15,6 +15,7 @@ import {
 } from "@material-ui/icons";
 import "./control.style.scss";
 import { VolumeOff } from "@mui/icons-material";
+import { Box } from "@mui/material";
 
 const useStyles = makeStyles({
   volumeSlider: {
@@ -67,25 +68,22 @@ const CustomSlider = withStyles({
 })(Slider);
 
 type ControlType = {
-  controlRef: HTMLElement | null;
+  controlRef: RefObject<HTMLElement>;
   onPlayPause: () => void;
   playing: boolean;
   onRewind: () => void;
   onForward: () => void;
   played: number;
-  onSeek: (e: React.MouseEvent<HTMLButtonElement>, value: string) => void;
-  onSeekMouseUp: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
-  ) => void;
+  onSeek: (event: ChangeEvent<object>, value: number | number[]) => void;
+  onSeekMouseUp: (event: ChangeEvent<object>, value: number | number[]) => void;
   volume: number;
   onVolumeChangeHandler: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => void;
   onVolumeSeekUp: (
-    e: React.MouseEvent<HTMLButtonElement>,
-    value: string
+    event: ChangeEvent<object>,
+    value: number | number[]
   ) => void;
   mute: boolean;
   onMute: () => void;
@@ -115,7 +113,7 @@ const Control = ({
   const classes = useStyles();
 
   return (
-    <div className="control_Container" ref={controlRef}>
+    <Box className="control_Container" ref={controlRef}>
       <div className="top_container">
         <h2>Video Player</h2>
       </div>
@@ -188,7 +186,7 @@ const Control = ({
           </div>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

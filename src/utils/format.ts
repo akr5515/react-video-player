@@ -1,4 +1,4 @@
-export const formatTime = (time) => {
+export const formatTime = (time: number) => {
   //formarting duration of video
   if (isNaN(time)) {
     return "00:00";
