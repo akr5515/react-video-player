@@ -1,4 +1,4 @@
-import React, { ChangeEvent, RefObject } from "react";
+import { ChangeEvent, RefObject } from "react";
 import {
   makeStyles,
   Slider,

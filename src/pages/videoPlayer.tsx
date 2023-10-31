@@ -74,7 +74,7 @@ function VideoPlayer() {
   };
 
   const seekHandler = (
-    event: ChangeEvent<object>,
+    _event: ChangeEvent<object>,
     value: number | number[]
   ) => {
     setVideoState({
@@ -84,7 +84,7 @@ function VideoPlayer() {
   };
 
   const seekMouseUpHandler = (
-    event: ChangeEvent<object>,
+    _event: ChangeEvent<object>,
     value: number | number[]
   ) => {
     setVideoState({ ...videoState, seeking: false });
@@ -94,7 +94,7 @@ function VideoPlayer() {
   };
 
   const volumeChangeHandler = (
-    event: ChangeEvent<object>,
+    _event: ChangeEvent<object>,
     value: number | number[]
   ) => {
     const newVolume = parseFloat(value.toString()) / 100;
@@ -106,7 +106,7 @@ function VideoPlayer() {
   };
 
   const volumeSeekUpHandler = (
-    event: ChangeEvent<object>,
+    _event: ChangeEvent<object>,
     value: number | number[]
   ) => {
     const newVolume = parseFloat(value.toString()) / 100;

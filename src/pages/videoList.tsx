@@ -1,4 +1,3 @@
-import React from "react";
 import { VIDEO_DATA } from "../data/data";
 import {
   Box,
