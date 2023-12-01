@@ -1,10 +1,10 @@
 import ReactPlayer from "react-player";
 import "./videoPlayer.style.css";
-import { Container } from "@mui/material";
+import { Box, Button, Container } from "@mui/material";
 import { ChangeEvent, useRef, useState } from "react";
 import Control from "../components/control";
 import { formatTime } from "../utils/format";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type VideoState = {
   playing: boolean;
@@ -17,6 +17,7 @@ type VideoState = {
 
 function VideoPlayer() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [videoState, setVideoState] = useState<VideoState>({
     playing: true,
@@ -200,6 +201,11 @@ function VideoPlayer() {
           />
         </div>
       </Container>
+      <Box sx={{ margin: "20px" }}>
+        <Button variant="contained" onClick={() => navigate("/")}>
+          Back
+        </Button>
+      </Box>
     </div>
   );
 }
